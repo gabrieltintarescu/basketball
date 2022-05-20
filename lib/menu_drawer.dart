@@ -1,11 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:lottie/lottie.dart';
 
-class Menu extends StatelessWidget {
-  Menu({Key? key}) : super(key: key);
+class Menu extends StatefulWidget {
+  final void Function(int) callback;
+  const Menu({Key? key, required this.callback}) : super(key: key);
 
+  @override
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
   var txtStyle = const TextStyle(
-      fontSize: 22, fontFamily: 'Montserrat', fontWeight: FontWeight.w500);
+      fontSize: 22, fontFamily: 'Sora', fontWeight: FontWeight.normal);
+
+  var selectedIndex = 0;
+
+  void setIndex(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    ZoomDrawer.of(context)?.toggle();
+    widget.callback(selectedIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,59 +34,120 @@ class Menu extends StatelessWidget {
         backgroundColor: const Color(0xFFFA4A0C),
         body: Padding(
           padding: EdgeInsets.only(
-              left: 25, top: height * 0.15, bottom: height * 0.1),
+              left: 25, top: height * 0.13, bottom: height * 0.1),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    leading:
-                        const Icon(CupertinoIcons.profile_circled, size: 25),
-                    title: Text('Profile', style: txtStyle),
-                    minLeadingWidth: 20,
-                  ),
-                  const SizedBox(height: 10),
-                  Divider(
-                    color: Colors.white.withOpacity(0.4),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  ListTile(
-                    leading: const Icon(CupertinoIcons.shopping_cart, size: 25),
-                    title: Text(
-                      'Orders',
-                      style: txtStyle,
+                  Container(
+                    margin: const EdgeInsets.only(left: 40),
+                    child: Lottie.asset(
+                      'assets/avatar.json',
+                      height: 120,
                     ),
-                    minLeadingWidth: 20,
                   ),
                   const SizedBox(height: 10),
-                  Divider(
-                    color: Colors.white.withOpacity(0.4),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  ListTile(
-                    leading: const Icon(CupertinoIcons.shield, size: 25),
-                    title: Text(
-                      'Security',
-                      style: txtStyle,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(
+                            selectedIndex == 0 ? 0.15 : 0,
+                          ),
+                        ),
+                      ],
                     ),
-                    minLeadingWidth: 20,
-                  ),
-                  const SizedBox(height: 10),
-                  Divider(
-                    color: Colors.white.withOpacity(0.4),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  ListTile(
-                    leading: const Icon(CupertinoIcons.settings, size: 25),
-                    title: Text(
-                      'Settings',
-                      style: txtStyle,
+                    child: ListTile(
+                      leading: const Icon(
+                        CupertinoIcons.profile_circled,
+                        size: 22,
+                      ),
+                      title: Text('Profile'.toUpperCase(), style: txtStyle),
+                      minLeadingWidth: 20,
+                      onTap: () => setIndex(0),
                     ),
-                    minLeadingWidth: 20,
+                  ),
+                  const SizedBox(height: 10),
+                  // Divider(
+                  //   color: Colors.white.withOpacity(0.4),
+                  //   height: 1,
+                  // ),
+                  const SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(
+                            selectedIndex == 1 ? 0.15 : 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading:
+                          const Icon(CupertinoIcons.shopping_cart, size: 22),
+                      title: Text(
+                        'Orders'.toUpperCase(),
+                        style: txtStyle,
+                      ),
+                      minLeadingWidth: 20,
+                      onTap: () => setIndex(1),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Divider(
+                  //   color: Colors.white.withOpacity(0.4),
+                  //   height: 1,
+                  // ),
+                  const SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(
+                            selectedIndex == 2 ? 0.15 : 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading: const Icon(CupertinoIcons.shield, size: 22),
+                      title: Text('Security'.toUpperCase(), style: txtStyle),
+                      minLeadingWidth: 20,
+                      onTap: () => setIndex(2),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Divider(
+                  //   color: Colors.white.withOpacity(0.4),
+                  //   height: 1,
+                  // ),
+                  const SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(
+                            selectedIndex == 3 ? 0.15 : 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading: const Icon(CupertinoIcons.settings, size: 22),
+                      title: Text(
+                        'Settings'.toUpperCase(),
+                        style: txtStyle,
+                      ),
+                      minLeadingWidth: 20,
+                      onTap: () => setIndex(3),
+                    ),
                   ),
                 ],
               ),

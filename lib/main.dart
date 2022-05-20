@@ -17,15 +17,53 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BasketBall',
-      theme: ThemeData(fontFamily: 'Montserrat'),
-      home: HomePage(),
+      theme: ThemeData(fontFamily: 'Sora'),
+      home: const HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final ZoomDrawerController z = ZoomDrawerController();
+
+  var contentIndex = 0;
+
+  Widget getScreen() {
+    switch (contentIndex) {
+      case 0:
+        return const MainContent();
+      case 1:
+        return const Scaffold(
+            backgroundColor: Color(0xFFEDEDED),
+            body: Center(
+                child: Text('Orders page', style: TextStyle(fontSize: 32))));
+      case 2:
+        return const Scaffold(
+            backgroundColor: Color(0xFFEDEDED),
+            body: Center(
+                child: Text('Security page', style: TextStyle(fontSize: 32))));
+      case 3:
+        return const Scaffold(
+            backgroundColor: Color(0xFFEDEDED),
+            body: Center(
+                child: Text('Settings page', style: TextStyle(fontSize: 32))));
+      default:
+        return const MainContent();
+    }
+  }
+
+  void changeContent(int index) {
+    setState(() {
+      contentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +74,10 @@ class HomePage extends StatelessWidget {
         showShadow: true,
         openCurve: Curves.fastOutSlowIn,
         slideWidth: MediaQuery.of(context).size.width * 0.65,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 700),
         menuBackgroundColor: const Color(0xFFFA4A0C),
         angle: 0.0,
-        mainScreen: const MainContent(),
-        menuScreen: Menu());
+        mainScreen: getScreen(),
+        menuScreen: Menu(callback: changeContent));
   }
 }
