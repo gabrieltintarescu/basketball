@@ -1,3 +1,4 @@
+import 'package:basketball/models/menu_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -12,18 +13,23 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  var txtStyle = const TextStyle(
-      fontSize: 22, fontFamily: 'Sora', fontWeight: FontWeight.normal);
-
   var selectedIndex = 0;
 
   void setIndex(int index) {
+    if (index == selectedIndex) return;
     setState(() {
       selectedIndex = index;
     });
     ZoomDrawer.of(context)?.toggle();
     widget.callback(selectedIndex);
   }
+
+  var menuItems = [
+    DrawerMenuItem(icon: CupertinoIcons.home, title: 'Acasă'),
+    DrawerMenuItem(icon: CupertinoIcons.person, title: 'Profil'),
+    DrawerMenuItem(icon: CupertinoIcons.chat_bubble, title: 'Mesaje'),
+    DrawerMenuItem(icon: CupertinoIcons.settings, title: 'Setări'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,136 +48,121 @@ class _MenuState extends State<Menu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 40),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFd53f0a).withOpacity(1),
+                            blurRadius: 10,
+                            offset: const Offset(5, 5),
+                          ),
+                        ]),
                     child: Lottie.asset(
                       'assets/avatar.json',
-                      height: 120,
+                      height: 100,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(
-                            selectedIndex == 0 ? 0.15 : 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: const Icon(
-                        CupertinoIcons.profile_circled,
-                        size: 22,
-                      ),
-                      title: Text('Profile'.toUpperCase(), style: txtStyle),
-                      minLeadingWidth: 20,
-                      onTap: () => setIndex(0),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // Divider(
-                  //   color: Colors.white.withOpacity(0.4),
-                  //   height: 1,
-                  // ),
-                  const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(
-                            selectedIndex == 1 ? 0.15 : 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading:
-                          const Icon(CupertinoIcons.shopping_cart, size: 22),
-                      title: Text(
-                        'Orders'.toUpperCase(),
-                        style: txtStyle,
-                      ),
-                      minLeadingWidth: 20,
-                      onTap: () => setIndex(1),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // Divider(
-                  //   color: Colors.white.withOpacity(0.4),
-                  //   height: 1,
-                  // ),
-                  const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(
-                            selectedIndex == 2 ? 0.15 : 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: const Icon(CupertinoIcons.shield, size: 22),
-                      title: Text('Security'.toUpperCase(), style: txtStyle),
-                      minLeadingWidth: 20,
-                      onTap: () => setIndex(2),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // Divider(
-                  //   color: Colors.white.withOpacity(0.4),
-                  //   height: 1,
-                  // ),
-                  const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(
-                            selectedIndex == 3 ? 0.15 : 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: const Icon(CupertinoIcons.settings, size: 22),
-                      title: Text(
-                        'Settings'.toUpperCase(),
-                        style: txtStyle,
-                      ),
-                      minLeadingWidth: 20,
-                      onTap: () => setIndex(3),
-                    ),
-                  ),
+                  ListView.builder(
+                      itemCount: menuItems.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return MenuItemNeumorphism(
+                          icon: Icon(menuItems[index].icon, size: 22),
+                          index: index,
+                          title: menuItems[index].title,
+                          callback: setIndex,
+                          isSelected: selectedIndex == index ? true : false,
+                        );
+                      }),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+                children: const [
                   SizedBox(
                     height: 50,
                     child: Center(
                       child: Text(
-                        'Sign-out',
-                        style: txtStyle,
+                        'Deconectare',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 7),
-                  const Icon(CupertinoIcons.arrow_right),
+                  SizedBox(width: 7),
+                  Icon(CupertinoIcons.arrow_right),
                 ],
               )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class MenuItemNeumorphism extends StatelessWidget {
+  final bool isSelected;
+  final void Function(int x) callback;
+  final int index;
+  final Widget icon;
+  final String title;
+  MenuItemNeumorphism(
+      {Key? key,
+      required this.isSelected,
+      required this.callback,
+      required this.index,
+      required this.icon,
+      required this.title})
+      : super(key: key);
+
+  var txtStyle = const TextStyle(
+    fontSize: 17,
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.normal,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: const Color(0xFFFA4A0C),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFFd53f0a).withOpacity(isSelected ? 1 : 0),
+                blurRadius: 10,
+                offset: const Offset(5, 5),
+              ),
+              BoxShadow(
+                color: const Color(0xFFff550e).withOpacity(isSelected ? 1 : 0),
+                blurRadius: 10,
+                offset: const Offset(-5, -5),
+              ),
+            ],
+          ),
+          child: ListTile(
+            leading: icon,
+            title: Text(
+              title,
+              style: txtStyle,
+            ),
+            minLeadingWidth: 20,
+            onTap: () => callback(index),
+          ),
+        ),
+      ],
     );
   }
 }
