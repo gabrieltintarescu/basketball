@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:weather/weather.dart';
 
 import 'home_page.dart';
 import 'menu_drawer.dart';
@@ -17,28 +16,11 @@ class _MainAppState extends State<MainApp> {
   final ZoomDrawerController z = ZoomDrawerController();
 
   var contentIndex = 0;
-  Weather? currentWeather;
-
-  WeatherFactory wf = WeatherFactory("997fed4508a28ef6b62f8b81ef1f8257",
-      language: Language.ROMANIAN);
-
-  @override
-  void initState() {
-    super.initState();
-    loadWeather();
-  }
-
-  void loadWeather() async {
-    currentWeather = await wf.currentWeatherByCityName('Bucharest');
-    setState(() {
-      print('da');
-    });
-  }
 
   Widget getScreen() {
     switch (contentIndex) {
       case 0:
-        return HomePage(currentWeather: currentWeather);
+        return HomePage();
       case 1:
         return const Scaffold(
             backgroundColor: Color(0xFFEDEDED),
@@ -55,9 +37,7 @@ class _MainAppState extends State<MainApp> {
             body: Center(
                 child: Text('Settings page', style: TextStyle(fontSize: 32))));
       default:
-        return HomePage(
-          currentWeather: currentWeather,
-        );
+        return HomePage();
     }
   }
 
@@ -76,8 +56,8 @@ class _MainAppState extends State<MainApp> {
       showShadow: true,
       openCurve: Curves.fastOutSlowIn,
       slideWidth: MediaQuery.of(context).size.width * 0.65,
-      duration: const Duration(milliseconds: 550),
-      menuBackgroundColor: const Color(0xFFFA4A0C),
+      duration: const Duration(milliseconds: 300),
+      menuBackgroundColor: const Color(0xFFDC5D1D),
       angle: 0.0,
       mainScreen: getScreen(),
       menuScreen: Menu(callback: changeContent),

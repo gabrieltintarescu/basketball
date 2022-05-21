@@ -39,6 +39,7 @@ dependencies:
   page_transition: ^2.0.5
   flutter_rating_bar: ^4.0.1
   weather: ^2.0.1
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,14 @@ flutter:
     - assets/basketball.json
     - assets/menu.png
     - assets/basketball-ball.png
+    - assets/weather/cloudy.json
+    - assets/weather/mist.json
+    - assets/weather/rain.json
+    - assets/weather/snow.json
+    - assets/weather/storm.json
+    - assets/weather/sunny.json
+    - assets/weather/windy.json
+        
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

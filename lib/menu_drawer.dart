@@ -37,7 +37,7 @@ class _MenuState extends State<Menu> {
     return Theme(
       data: ThemeData.dark(),
       child: Scaffold(
-        backgroundColor: const Color(0xFFFA4A0C),
+        backgroundColor: const Color(0xFFDC5D1D),
         body: Padding(
           padding: EdgeInsets.only(
               left: 25, top: height * 0.13, bottom: height * 0.1),
@@ -53,7 +53,7 @@ class _MenuState extends State<Menu> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFFd53f0a).withOpacity(1),
+                            color: const Color(0xFFDC5D1D).withOpacity(1),
                             blurRadius: 10,
                             offset: const Offset(5, 5),
                           ),
@@ -70,7 +70,11 @@ class _MenuState extends State<Menu> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return MenuItemNeumorphism(
-                          icon: Icon(menuItems[index].icon, size: 22),
+                          icon: Icon(
+                            menuItems[index].icon,
+                            size: 22,
+                            color: Colors.white,
+                          ),
                           index: index,
                           title: menuItems[index].title,
                           callback: setIndex,
@@ -124,45 +128,61 @@ class MenuItemNeumorphism extends StatelessWidget {
       : super(key: key);
 
   var txtStyle = const TextStyle(
-    fontSize: 17,
-    fontFamily: 'Sora',
-    fontWeight: FontWeight.normal,
-  );
+      fontSize: 17,
+      fontFamily: 'Sora',
+      fontWeight: FontWeight.normal,
+      color: Colors.white);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 10),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: const Color(0xFFFA4A0C),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFd53f0a).withOpacity(isSelected ? 1 : 0),
-                blurRadius: 10,
-                offset: const Offset(5, 5),
-              ),
-              BoxShadow(
-                color: const Color(0xFFff550e).withOpacity(isSelected ? 1 : 0),
-                blurRadius: 10,
-                offset: const Offset(-5, -5),
-              ),
-            ],
-          ),
-          child: ListTile(
-            leading: icon,
-            title: Text(
-              title,
-              style: txtStyle,
+        CupertinoButton(
+          child: AnimatedContainer(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+            duration: const Duration(milliseconds: 500),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: const Color(0xFFDC5D1D),
+              boxShadow: [
+                BoxShadow(
+                  color:
+                      const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),
+                  blurRadius: 10,
+                  offset: const Offset(5, 5),
+                ),
+                BoxShadow(
+                  color:
+                      const Color(0xFFe3874a).withOpacity(isSelected ? 1 : 0),
+                  blurRadius: 10,
+                  offset: const Offset(-5, -5),
+                ),
+              ],
             ),
-            minLeadingWidth: 20,
-            onTap: () => callback(index),
+            child: Row(children: [
+              icon,
+              const SizedBox(width: 7),
+              Text(
+                title,
+                style: txtStyle,
+              )
+            ]),
           ),
+          onPressed: () => callback(index),
         ),
       ],
     );
   }
 }
+
+
+
+// ListTile(
+//             leading: icon,
+//             title: Text(
+//               title,
+//               style: txtStyle,
+//             ),
+//             minLeadingWidth: 20,
+//             onTap: callback(index),
+//           ),
