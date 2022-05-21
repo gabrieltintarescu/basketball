@@ -70,11 +70,7 @@ class _MenuState extends State<Menu> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return MenuItemNeumorphism(
-                          icon: Icon(
-                            menuItems[index].icon,
-                            size: 22,
-                            color: Colors.white,
-                          ),
+                          icon: Icon(menuItems[index].icon, size: 22),
                           index: index,
                           title: menuItems[index].title,
                           callback: setIndex,
@@ -128,61 +124,45 @@ class MenuItemNeumorphism extends StatelessWidget {
       : super(key: key);
 
   var txtStyle = const TextStyle(
-      fontSize: 17,
-      fontFamily: 'Sora',
-      fontWeight: FontWeight.normal,
-      color: Colors.white);
+    fontSize: 17,
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.normal,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CupertinoButton(
-          child: AnimatedContainer(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-            duration: const Duration(milliseconds: 500),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: const Color(0xFFDC5D1D),
-              boxShadow: [
-                BoxShadow(
-                  color:
-                      const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),
-                  blurRadius: 10,
-                  offset: const Offset(5, 5),
-                ),
-                BoxShadow(
-                  color:
-                      const Color(0xFFe3874a).withOpacity(isSelected ? 1 : 0),
-                  blurRadius: 10,
-                  offset: const Offset(-5, -5),
-                ),
-              ],
-            ),
-            child: Row(children: [
-              icon,
-              const SizedBox(width: 7),
-              Text(
-                title,
-                style: txtStyle,
-              )
-            ]),
+        const SizedBox(height: 10),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: const Color(0xFFDC5D1D),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),
+                blurRadius: 10,
+                offset: const Offset(5, 5),
+              ),
+              BoxShadow(
+                color: const Color(0xFFe3874a).withOpacity(isSelected ? 1 : 0),
+                blurRadius: 10,
+                offset: const Offset(-5, -5),
+              ),
+            ],
           ),
-          onPressed: () => callback(index),
+          child: ListTile(
+            leading: icon,
+            title: Text(
+              title,
+              style: txtStyle,
+            ),
+            minLeadingWidth: 20,
+            onTap: () => callback(index),
+          ),
         ),
       ],
     );
   }
 }
-
-
-
-// ListTile(
-//             leading: icon,
-//             title: Text(
-//               title,
-//               style: txtStyle,
-//             ),
-//             minLeadingWidth: 20,
-//             onTap: callback(index),
-//           ),
