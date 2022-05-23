@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -14,10 +15,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final listOfPhrases = [
+    'Facem încălzirea...',
+    'Facem joc de glezne...',
+    'Facem antrenamentul...',
+    'Ne pregătim de meci...',
+    'Ne pregătim să aruncăm la coș...',
+  ];
+  var phraseIndex = 0;
   @override
   void initState() {
     super.initState();
+    setPhrase();
     startTimer();
+  }
+
+  void setPhrase() {
+    var rng = Random();
+    setState(() {
+      phraseIndex = rng.nextInt(listOfPhrases.length);
+    });
   }
 
   startTimer() async {
@@ -38,41 +55,43 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LottieBuilder.asset('assets/basketball.json'),
-              Transform.translate(
-                offset: const Offset(0, -30),
-                child: const Text(
-                  'Facem încălzirea..',
-                  style: TextStyle(fontSize: 18),
+      body: SafeArea(
+        child: Stack(children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LottieBuilder.asset('assets/basketball.json'),
+                Transform.translate(
+                  offset: const Offset(0, -30),
+                  child: Text(
+                    listOfPhrases[phraseIndex],
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 100,
-                child: LinearProgressIndicator(
-                  backgroundColor: Colors.grey[500],
-                  minHeight: 2,
-                  color: const Color(0xFFFA4A0C),
-                ),
-              )
-            ],
-          ),
-        ),
-        Column(
-          children: [
-            Expanded(child: Container()),
-            const Text(
-              '© 2022 Gabriel Țintărescu',
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
+                SizedBox(
+                  width: 100,
+                  child: LinearProgressIndicator(
+                    backgroundColor: Colors.grey[500],
+                    minHeight: 2,
+                    color: const Color(0xFFFA4A0C),
+                  ),
+                )
+              ],
             ),
-            const SizedBox(height: 10),
-          ],
-        )
-      ]),
+          ),
+          Column(
+            children: [
+              Expanded(child: Container()),
+              const Text(
+                '© 2022 Gabriel Țintărescu',
+                style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
+              ),
+              const SizedBox(height: 10),
+            ],
+          )
+        ]),
+      ),
     );
   }
 }

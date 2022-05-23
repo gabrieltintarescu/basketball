@@ -34,11 +34,18 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    return Theme(
-      data: ThemeData.dark(),
-      child: Scaffold(
-        backgroundColor: const Color(0xFFDC5D1D),
-        body: Padding(
+    return Scaffold(
+      backgroundColor: const Color(0xFFDC5D1D), //? Culoare bg drawer
+      body: Stack(children: [
+        Opacity(
+          opacity: 0.8,
+          child: SizedBox(
+            height: double.infinity,
+            child:
+                Lottie.asset('assets/background.json', fit: BoxFit.fitHeight),
+          ),
+        ),
+        Padding(
           padding: EdgeInsets.only(
               left: 25, top: height * 0.13, bottom: height * 0.1),
           child: Column(
@@ -48,7 +55,7 @@ class _MenuState extends State<Menu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 20),
+                    margin: const EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -61,10 +68,9 @@ class _MenuState extends State<Menu> {
                         ]),
                     child: Lottie.asset(
                       'assets/avatar.json',
-                      height: 100,
+                      height: 110,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   ListView.builder(
                       itemCount: menuItems.length,
                       physics: const NeverScrollableScrollPhysics(),
@@ -80,31 +86,37 @@ class _MenuState extends State<Menu> {
                       }),
                 ],
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  SizedBox(
-                    height: 50,
-                    child: Center(
-                      child: Text(
-                        'Deconectare',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.normal,
+              CupertinoButton(
+                onPressed: () {},
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    SizedBox(
+                      height: 50,
+                      child: Center(
+                        child: Text(
+                          'Deconectare',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Sora',
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 7),
-                  Icon(CupertinoIcons.arrow_right),
-                ],
+                    SizedBox(width: 7),
+                    Icon(
+                      CupertinoIcons.arrow_right,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               )
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 }
@@ -125,7 +137,7 @@ class MenuItemNeumorphism extends StatelessWidget {
       : super(key: key);
 
   final txtStyle = const TextStyle(
-      fontSize: 17,
+      fontSize: 20,
       fontFamily: 'Sora',
       fontWeight: FontWeight.normal,
       color: Colors.white);
@@ -133,13 +145,15 @@ class MenuItemNeumorphism extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+      padding: const EdgeInsets.only(bottom: 20, right: 15),
+      pressedOpacity: 0.5,
       child: AnimatedContainer(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        duration: const Duration(milliseconds: 500),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        duration: const Duration(milliseconds: 100),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: const Color(0xFFDC5D1D),
+          color: isSelected ? const Color(0xFFDC5D1D) : null,
           boxShadow: [
             BoxShadow(
               color: const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),

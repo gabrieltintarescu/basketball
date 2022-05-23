@@ -40,10 +40,13 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   weather: ^2.0.1
   shimmer: ^2.0.0
+  entry: ^0.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -76,6 +79,7 @@ flutter:
     - assets/weather/storm.json
     - assets/weather/sunny.json
     - assets/weather/windy.json
+    - assets/background.json
         
 
   # An image asset can refer to one or more resolution-specific "variants", see

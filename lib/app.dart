@@ -20,24 +20,27 @@ class _MainAppState extends State<MainApp> {
   Widget getScreen() {
     switch (contentIndex) {
       case 0:
-        return HomePage();
+        return const HomePage();
       case 1:
         return const Scaffold(
             backgroundColor: Color(0xFFEDEDED),
             body: Center(
-                child: Text('Orders page', style: TextStyle(fontSize: 32))));
+                child:
+                    Text('Pagine de profil', style: TextStyle(fontSize: 32))));
       case 2:
         return const Scaffold(
             backgroundColor: Color(0xFFEDEDED),
             body: Center(
-                child: Text('Security page', style: TextStyle(fontSize: 32))));
+                child:
+                    Text('Pagina de mesaje', style: TextStyle(fontSize: 32))));
       case 3:
         return const Scaffold(
             backgroundColor: Color(0xFFEDEDED),
             body: Center(
-                child: Text('Settings page', style: TextStyle(fontSize: 32))));
+                child:
+                    Text('Pagina de setări', style: TextStyle(fontSize: 32))));
       default:
-        return HomePage();
+        return const HomePage();
     }
   }
 
