@@ -48,6 +48,7 @@ class _MenuState extends State<Menu> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    margin: const EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -114,7 +115,7 @@ class MenuItemNeumorphism extends StatelessWidget {
   final int index;
   final Widget icon;
   final String title;
-  MenuItemNeumorphism(
+  const MenuItemNeumorphism(
       {Key? key,
       required this.isSelected,
       required this.callback,
@@ -123,46 +124,53 @@ class MenuItemNeumorphism extends StatelessWidget {
       required this.title})
       : super(key: key);
 
-  var txtStyle = const TextStyle(
-    fontSize: 17,
-    fontFamily: 'Sora',
-    fontWeight: FontWeight.normal,
-  );
+  final txtStyle = const TextStyle(
+      fontSize: 17,
+      fontFamily: 'Sora',
+      fontWeight: FontWeight.normal,
+      color: Colors.white);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 10),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: const Color(0xFFDC5D1D),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),
-                blurRadius: 10,
-                offset: const Offset(5, 5),
-              ),
-              BoxShadow(
-                color: const Color(0xFFe3874a).withOpacity(isSelected ? 1 : 0),
-                blurRadius: 10,
-                offset: const Offset(-5, -5),
-              ),
-            ],
-          ),
-          child: ListTile(
-            leading: icon,
-            title: Text(
-              title,
-              style: txtStyle,
+    return CupertinoButton(
+      child: AnimatedContainer(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        duration: const Duration(milliseconds: 500),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: const Color(0xFFDC5D1D),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFb05417).withOpacity(isSelected ? 1 : 0),
+              blurRadius: 10,
+              offset: const Offset(5, 5),
             ),
-            minLeadingWidth: 20,
-            onTap: () => callback(index),
-          ),
+            BoxShadow(
+              color: const Color(0xFFe3874a).withOpacity(isSelected ? 1 : 0),
+              blurRadius: 10,
+              offset: const Offset(-5, -5),
+            ),
+          ],
         ),
-      ],
+        child: Text(
+          title,
+          style: txtStyle,
+        ),
+      ),
+      onPressed: () => callback(index),
     );
   }
 }
+
+
+
+// ListTile(
+//         leading: icon,
+//         title: Text(
+//           title,
+//           style: txtStyle,
+//         ),
+//         minLeadingWidth: 20,
+//         onTap: () => callback(index),
+//       ),

@@ -8,7 +8,7 @@ import 'components/court_card.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  var courtList = [
+  final courtList = [
     Court(
         imagePath: 'assets/basketball-ball.png',
         name: 'Tei',
@@ -105,7 +105,8 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {}),
-              )
+              ),
+              const SizedBox(height: 25),
             ],
           ),
         ),
