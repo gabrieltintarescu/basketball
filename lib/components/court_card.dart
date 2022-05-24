@@ -39,7 +39,7 @@ class CourtCard extends StatelessWidget {
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   padding:
-                      const EdgeInsets.only(left: 15, right: 15, bottom: 20),
+                      const EdgeInsets.only(left: 15, right: 20, bottom: 20),
                   width: 140,
                   height: 180,
                   decoration: BoxDecoration(

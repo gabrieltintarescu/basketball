@@ -41,6 +41,7 @@ dependencies:
   weather: ^2.0.1
   shimmer: ^2.0.0
   entry: ^0.0.6
+  geolocator: ^8.2.1
 
 dev_dependencies:
   flutter_test:

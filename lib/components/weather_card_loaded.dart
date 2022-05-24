@@ -61,14 +61,15 @@ class WeatherCardLoaded extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               Column(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Locația curentă',
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    'București',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+                    '${weather.areaName}',
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.w700),
                   ),
                 ],
               ),

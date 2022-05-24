@@ -26,7 +26,7 @@ class _MainAppState extends State<MainApp> {
             backgroundColor: Color(0xFFEDEDED),
             body: Center(
                 child:
-                    Text('Pagine de profil', style: TextStyle(fontSize: 32))));
+                    Text('Pagina de profil', style: TextStyle(fontSize: 32))));
       case 2:
         return const Scaffold(
             backgroundColor: Color(0xFFEDEDED),
@@ -52,13 +52,14 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return ZoomDrawer(
       controller: z,
       borderRadius: 24,
       style: DrawerStyle.defaultStyle,
       showShadow: true,
       openCurve: Curves.fastOutSlowIn,
-      slideWidth: MediaQuery.of(context).size.width * 0.65,
+      slideWidth: width > 410 ? width * 0.65 : width * 0.9,
       duration: const Duration(milliseconds: 300),
       menuBackgroundColor: const Color(0xFFDC5D1D),
       angle: 0.0,

@@ -71,6 +71,7 @@ class _MenuState extends State<Menu> {
                       height: 110,
                     ),
                   ),
+                  const SizedBox(height: 30),
                   ListView.builder(
                       itemCount: menuItems.length,
                       physics: const NeverScrollableScrollPhysics(),
