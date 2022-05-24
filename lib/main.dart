@@ -23,9 +23,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BasketBall',
       theme: ThemeData(
-          fontFamily: 'Sora',
-          colorScheme: const ColorScheme.light()
-              .copyWith(primary: const Color(0xFFDC5D1D))),
+        fontFamily: 'Sora',
+        primaryColor: const Color(0xFFDC5D1D),
+      ),
       themeMode: ThemeMode.light,
       home: const SplashScreen(),
     );

@@ -61,7 +61,7 @@ class _MainAppState extends State<MainApp> {
       openCurve: Curves.fastOutSlowIn,
       slideWidth: width > 410 ? width * 0.65 : width * 0.9,
       duration: const Duration(milliseconds: 300),
-      menuBackgroundColor: const Color(0xFFDC5D1D),
+      menuBackgroundColor: Theme.of(context).primaryColor,
       angle: 0.0,
       mainScreen: getScreen(),
       menuScreen: Menu(callback: changeContent),

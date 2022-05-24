@@ -120,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 15),
             Expanded(
               child: Entry(
                 yOffset: 500,
@@ -172,15 +173,33 @@ void showPlatformDialog(BuildContext context, Court court) {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: Text('Vrei la baschet in ${court.name}?'),
-            content: const Text('Cu prietenii tai la terenul de joaca ales.'),
+            title: Text(
+              'Vrei la baschet in ${court.name}?',
+              style: const TextStyle(fontFamily: 'Sora'),
+            ),
+            content: Text(
+              'Voi anunța toți prietenii tăi să mergeți astăzi în ${court.name} la baschet.',
+              // style: const TextStyle(fontFamily: 'Sora'),
+            ),
             actions: [
               CupertinoDialogAction(
-                child: const Text('Da'),
+                child: Text(
+                  'Da',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               CupertinoDialogAction(
-                child: const Text('Nu'),
+                child: Text(
+                  'Nu',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               )
             ],
