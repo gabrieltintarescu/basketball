@@ -2,7 +2,7 @@
 ![Logo](https://raw.githubusercontent.com/gabrieltintarescu/basketball/main/resources/logo.png)
 
 
-# 💬 Hoopers - Basetball App
+# 🏀 Hoopers - Basetball App
 Basketball app design mockup using OpenWeatherMAP API.
 
 ![](https://raw.githubusercontent.com/gabrieltintarescu/basketball/main/resources/presentation.png)
