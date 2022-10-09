@@ -66,8 +66,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      icon: Image.asset('assets/menu.png'),
-                      onPressed: () => ZoomDrawer.of(context)?.toggle()),
+                    icon: Image.asset('assets/menu.png'),
+                    onPressed: () => ZoomDrawer.of(context)?.toggle(),
+                  ),
                 ],
               ),
             ),
@@ -212,23 +213,44 @@ void showPlatformDialog(BuildContext context, Court court) {
           return AlertDialog(
             title: Text(
               'Vrei la baschet in ${court.name}?',
+              textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            content: const Text('Cu prietenii tai la terenul de joaca ales.'),
+            content: Text(
+              'Voi anunța toți prietenii tăi să mergeți astăzi în ${court.name} la baschet.',
+              textAlign: TextAlign.center,
+            ),
             actionsAlignment: MainAxisAlignment.spaceEvenly,
             actionsPadding: const EdgeInsets.only(bottom: 10),
             actions: [
               TextButton(
-                child: const Text(
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                    Theme.of(context).primaryColor.withOpacity(0.1),
+                  ),
+                ),
+                child: Text(
                   'DA',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor),
                 ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               TextButton(
-                child: const Text('NU',
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                    Theme.of(context).primaryColor.withOpacity(0.1),
+                  ),
+                ),
+                child: Text(
+                  'NU',
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor),
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               )
             ],

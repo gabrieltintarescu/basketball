@@ -34,7 +34,7 @@ class _WeatherCardState extends State<WeatherCard> {
       w = await wf.currentWeatherByLocation(pos.latitude, pos.longitude);
     }
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       currentWeather = w;
     });
